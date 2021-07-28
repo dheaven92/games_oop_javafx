@@ -24,8 +24,8 @@ public final class Logic {
     private boolean free(Cell[] steps) throws OccupiedCellException {
         for (Cell step : steps) {
             for (Figure figure : figures) {
-                if (figure.position().equals(step)) {
-                    throw new OccupiedCellException();
+                if (figure != null && figure.position().equals(step)) {
+                    throw new OccupiedCellException(String.format("Cell %s is occupied with another figure", step));
                 }
             }
         }
@@ -44,6 +44,6 @@ public final class Logic {
                 return index;
             }
         }
-        throw new FigureNotFoundException();
+        throw new FigureNotFoundException(String.format("No figure found on cell %s", cell));
     }
 }
